@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="b">
+            <div class="wave w1"></div>
+            <div class="wave w2"></div>
+            <div class="wave w3"></div>
+            <div class="cDate">
+                <div class="dateC cD"></div>
+                <div class="yearC cD"></div>
+            </div>
+<div class="switches">
+<button class="prev mct" onclick="previous()">&#10094</button>
+<div class="sMonth"></div>
+<button class="next mct" onclick="next()">&#10095</button>
+</div>
+            <table class="calendar">
+                <tr>
+                     <th>S</th>
+                     <th>M</th>
+                     <th>T</th>
+                     <th>W</th>
+                     <th>T</th>
+                     <th>F</th>
+                     <th>S</th>
+                </tr>
+                <tbody class="calendar-body">
+                    
+                </tbody>
+            </table>
+        </div>
+        <script>
+var today = new Date();
+var currentMonth = today.getMonth();
+var currentYear = today.getFullYear();
+var selectYear = document.querySelector(".yearC");
+var sMonth = document.querySelector(".sMonth");
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "November", "Dec"];
+var dateC = document.querySelector(".dateC");
+showCalendar(currentMonth, currentYear);
+function next() {
+currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
+currentMonth = (currentMonth + 1) % 12;
+showCalendar(currentMonth, currentYear);
+}
+function previous() {
+currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1; showCalendar(currentMonth, currentYear);
+}
+function showCalendar(month, year) {
+    var firstDay = (new Date(year, month)).getDay();
+    var daysInMonth = 32 - new Date(year, month, 32).getDate();
+    var tbl = document.querySelector(".calendar-body");
+    tbl.innerHTML = "";
+    dateC.innerHTML = today.getDate(); 
+    selectYear.innerHTML = year;
+    sMonth.innerHTML = months[month];
+    var date = 1; for (var i = 0; i < 6; i++) { 
+    var row = document.createElement("tr");
+    for (var j = 0; j < 7; j++) {
+        if (i === 0 && j < firstDay) {
+            var cell = document.createElement("td");
+            var cellText = document.createTextNode(""); 
+            cell.appendChild(cellText); 
+            row.appendChild(cell);
+            } else if (date > daysInMonth) {
+                break; 
+            } else {
+            var cell = document.createElement("td");
+            var cellText = document.createTextNode(date);
+            if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) { cell.classList.add("today"); } 
+    // color today's date 
+    cell.appendChild(cellText);
+    row.appendChild(cell); date++;
+     }
+   } tbl.appendChild(row); 
+    // appending each row into calendar body. 
+    } 
+}
+</script>
+    </body>
+</html>
