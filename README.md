@@ -1,5 +1,6 @@
 # Calendar
-![my calender screenshot](screenshot.jpg)
+<img src="screenshot.jpg" width="250" height="250">
+<br>
 A simple calendar using pure HTML and CSS only. 
 
 # Getting started
